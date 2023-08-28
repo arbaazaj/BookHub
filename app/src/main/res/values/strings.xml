@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">BookHub</string>
+    <string name="menu_item_dashboard">Dashboard</string>
+</resources>
