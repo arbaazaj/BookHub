@@ -1,4 +1,4 @@
-package com.ajf.bookhub
+package com.ajf.bookhub.activity
 
 import android.os.Bundle
 import android.view.MenuItem
@@ -9,6 +9,11 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.ajf.bookhub.R
+import com.ajf.bookhub.fragment.AboutFragment
+import com.ajf.bookhub.fragment.DashboardFragment
+import com.ajf.bookhub.fragment.FavoriteFragment
+import com.ajf.bookhub.fragment.ProfileFragment
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
