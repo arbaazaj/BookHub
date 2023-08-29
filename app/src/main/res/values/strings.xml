@@ -13,4 +13,9 @@
     <string name="favorite_fragment">Favorite Fragment</string>
     <string name="profile_fragment">Profile Fragment</string>
     <string name="about_fragment">About Us</string>
+    <string name="img_desc_profile_image">Profile Image</string>
+    <string name="txt_profile_name">Arbaaz Shah</string>
+    <string name="txt_profile_email">Email: example@gmail.com</string>
+    <string name="txt_profile_number">Mobile No: +971500000000</string>
+    <string name="txt_profile_address">Address:- 23St, Al Rigga, Deira, Dubai, Dubai, U.A.E</string>
 </resources>
