@@ -11,7 +11,7 @@ import com.ajf.bookhub.R
 class DashboardRecyclerAdapter(val context: Context, val itemList: ArrayList<String>) :
     RecyclerView.Adapter<DashboardRecyclerAdapter.DashboardViewHolder>() {
     class DashboardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val textView: TextView = view.findViewById(R.id.tvRecyclerRowItem)
+        val textView: TextView = view.findViewById(R.id.tvBookTitleID)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DashboardViewHolder {
