@@ -20,6 +20,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var frameLayout: FrameLayout
     private lateinit var navigationView: NavigationView
 
+    private var previousMenuItem: MenuItem? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -54,14 +56,20 @@ class MainActivity : AppCompatActivity() {
         navigationView.setNavigationItemSelectedListener {
 
             // These are the ui for the menu items in navigation drawer.
+            if (previousMenuItem != null) {
+                previousMenuItem?.isChecked = false
+            }
+
+            // Checking if the current menu item is selected in the drawer.
+            it.isCheckable = true
+            it.isChecked = true
+            // Changing the current menu item to previous.
+            previousMenuItem = it
+
             // Dashboard Fragment
             when (it.itemId) {
                 R.id.dashboard -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.frameLayout, DashboardFragment())
-                        .commit()
-
-                    supportActionBar?.title = "Dashboard"
+                    setDefaultFragmentView()
                     drawerLayout.closeDrawers()
                 }
 
@@ -100,6 +108,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+        when (supportFragmentManager.findFragmentById(R.id.frameLayout)) {
+            !is DashboardFragment -> setDefaultFragmentView()
+            else -> super.onBackPressed()
+        }
+    }
+
     // OnClicked functionality of navigation menu items for e.g. (Dashboard, Favorite, etc.).
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
@@ -128,5 +144,6 @@ class MainActivity : AppCompatActivity() {
         transaction.replace(R.id.frameLayout, fragment)
         transaction.commit()
         supportActionBar?.title = "Dashboard"
+        navigationView.setCheckedItem(R.id.dashboard)
     }
 }
