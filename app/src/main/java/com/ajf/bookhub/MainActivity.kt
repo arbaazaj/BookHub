@@ -59,7 +59,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.dashboard -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.frameLayout, DashboardFragment())
-                        .addToBackStack("Dashboard")
                         .commit()
 
                     supportActionBar?.title = "Dashboard"
@@ -70,7 +69,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.favorite -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.frameLayout, FavoriteFragment())
-                        .addToBackStack("Favorites")
                         .commit()
 
                     supportActionBar?.title = "Favorites"
@@ -81,7 +79,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.profile -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.frameLayout, ProfileFragment())
-                        .addToBackStack("Profile")
                         .commit()
 
                     supportActionBar?.title = "Profile"
@@ -92,7 +89,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.about -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.frameLayout, AboutFragment())
-                        .addToBackStack("About")
                         .commit()
 
                     supportActionBar?.title = "About Us"
