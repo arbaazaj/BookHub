@@ -3,7 +3,6 @@ package com.ajf.bookhub
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.FrameLayout
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -46,23 +45,39 @@ class MainActivity : AppCompatActivity() {
 
             when (it.itemId) {
                 R.id.dashboard -> {
-                    Toast.makeText(this@MainActivity, "Clicked on Dashboard", Toast.LENGTH_SHORT)
-                        .show()
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.frameLayout, DashboardFragment())
+                        .addToBackStack("Dashboard")
+                        .commit()
+
+                    drawerLayout.closeDrawers()
                 }
 
                 R.id.favorite -> {
-                    Toast.makeText(this@MainActivity, "Clicked on Favorite", Toast.LENGTH_SHORT)
-                        .show()
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.frameLayout, FavoriteFragment())
+                        .addToBackStack("Favorites")
+                        .commit()
+
+                    drawerLayout.closeDrawers()
                 }
 
                 R.id.profile -> {
-                    Toast.makeText(this@MainActivity, "Clicked on Profile", Toast.LENGTH_SHORT)
-                        .show()
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.frameLayout, ProfileFragment())
+                        .addToBackStack("Profile")
+                        .commit()
+
+                    drawerLayout.closeDrawers()
                 }
 
                 R.id.about -> {
-                    Toast.makeText(this@MainActivity, "Clicked on About Us", Toast.LENGTH_SHORT)
-                        .show()
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.frameLayout, AboutFragment())
+                        .addToBackStack("About")
+                        .commit()
+
+                    drawerLayout.closeDrawers()
                 }
             }
 
