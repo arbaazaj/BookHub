@@ -6,11 +6,19 @@
     tools:context=".DashboardFragment">
 
     <TextView
-        android:id="@+id/idDashboardFragment"
+        android:id="@+id/tvDashboardFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:text="@string/dashboard_fragment"
         android:textSize="20sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvDashboard"
+        android:padding="10dp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/tvDashboardFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>
