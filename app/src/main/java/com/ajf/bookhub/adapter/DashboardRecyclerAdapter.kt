@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ajf.bookhub.R
 import com.ajf.bookhub.model.Book
+import com.squareup.picasso.Picasso
 
 class DashboardRecyclerAdapter(val context: Context, private val itemList: ArrayList<Book>) :
     RecyclerView.Adapter<DashboardRecyclerAdapter.DashboardViewHolder>() {
@@ -37,9 +38,13 @@ class DashboardRecyclerAdapter(val context: Context, private val itemList: Array
         val book = itemList[position]
         holder.txtBookTitle.text = book.bookName
         holder.txtBookAuthor.text = book.bookAuthor
-        holder.txtBookPrice.text = book.bookCost
+        holder.txtBookPrice.text = book.bookPrice
         holder.txtBookRating.text = book.bookRating
-        holder.imgBookCover.setImageResource(book.bookCover)
+        //holder.imgBookCover.setImageResource(book.bookCover)
+        Picasso.get()
+            .load(book.bookCover)
+            .error(R.drawable.default_book_cover)
+            .into(holder.imgBookCover);
 
         holder.rlContent.setOnClickListener {
 

@@ -135,7 +135,7 @@ class MainActivity : AppCompatActivity() {
     // Also changing the color of the status bar.
     private fun setUpToolbar() {
         setSupportActionBar(toolbar)
-        window.statusBarColor = ContextCompat.getColor(this, R.color.primaryColorDark)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.colorPrimaryDark)
         supportActionBar?.title = "Toolbar Title"
         supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
