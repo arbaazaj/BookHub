@@ -23,4 +23,6 @@
     <string name="txt_author">Author</string>
     <string name="txt_price">Rs. 299</string>
     <string name="btn_txt_check_internet">Check Internet</string>
+    <string name="txt_about_the_book">About the Book</string>
+    <string name="btn_txt_add_to_favorite">Add to Favorite</string>
 </resources>

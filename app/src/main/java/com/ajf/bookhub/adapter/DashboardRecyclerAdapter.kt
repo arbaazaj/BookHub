@@ -1,6 +1,7 @@
 package com.ajf.bookhub.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ajf.bookhub.R
+import com.ajf.bookhub.activity.DescriptionActivity
 import com.ajf.bookhub.model.Book
 import com.squareup.picasso.Picasso
 
@@ -47,7 +49,9 @@ class DashboardRecyclerAdapter(val context: Context, private val itemList: Array
             .into(holder.imgBookCover);
 
         holder.rlContent.setOnClickListener {
-
+            val intent = Intent(context, DescriptionActivity::class.java)
+            intent.putExtra("book_id", book.bookId)
+            context.startActivity(intent)
         }
 
     }
