@@ -1,7 +1,5 @@
 package com.ajf.bookhub.model
 
-import com.ajf.bookhub.R
-
 data class Book(
     val bookId: String,
     val bookName: String,

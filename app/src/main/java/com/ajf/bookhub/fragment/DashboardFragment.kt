@@ -27,12 +27,11 @@ import org.json.JSONException
 
 class DashboardFragment : Fragment() {
 
+    // Declaring variables.
     private lateinit var rvDashboard: RecyclerView
     private lateinit var layoutManager: RecyclerView.LayoutManager
-
     private lateinit var recyclerAdapter: DashboardRecyclerAdapter
     private var bookInfoList: ArrayList<Book> = ArrayList()
-
     private lateinit var progressLayout: RelativeLayout
     private lateinit var progressBar: ProgressBar
 
@@ -44,11 +43,9 @@ class DashboardFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
 
         rvDashboard = view.findViewById(R.id.rvDashboard)
-
         layoutManager = LinearLayoutManager(activity)
         progressLayout = view.findViewById(R.id.progressLayout)
         progressBar = view.findViewById(R.id.progressBar)
-
         progressLayout.visibility = View.VISIBLE
 
         // Adding a divider between each list item
@@ -59,6 +56,7 @@ class DashboardFragment : Fragment() {
 //            )
 //        )
 
+        // Volley API requests.
         val queue = Volley.newRequestQueue(activity as Context)
         val url = "http://13.235.250.119/v1/book/fetch_books/"
 
@@ -68,7 +66,7 @@ class DashboardFragment : Fragment() {
                 url,
                 null,
                 Response.Listener {
-
+                    // Json response from the server.
                     try {
                         progressLayout.visibility = View.GONE
                         val success = it.getBoolean("success")
@@ -87,18 +85,15 @@ class DashboardFragment : Fragment() {
                                 bookInfoList.add(bookObject)
                                 recyclerAdapter =
                                     DashboardRecyclerAdapter(activity as Context, bookInfoList)
-
                                 rvDashboard.adapter = recyclerAdapter
                                 rvDashboard.layoutManager = layoutManager
-
                             }
                         } else {
                             Toast.makeText(
                                 activity as Context,
                                 "Some error occurred",
                                 Toast.LENGTH_LONG
-                            )
-                                .show()
+                            ).show()
                         }
                     } catch (e: JSONException) {
                         Toast.makeText(
@@ -107,16 +102,16 @@ class DashboardFragment : Fragment() {
                             Toast.LENGTH_LONG
                         ).show()
                     }
-
-
                 },
                 Response.ErrorListener {
+                    // Json error.
                     Toast.makeText(
                         activity as Context,
                         "Unable to fetch books error occurred",
                         Toast.LENGTH_LONG
                     ).show()
                 }) {
+                // Sending header request with token
                 override fun getHeaders(): MutableMap<String, String> {
                     val headers = HashMap<String, String>()
                     headers["Content-Type"] = "application/json"
@@ -124,7 +119,6 @@ class DashboardFragment : Fragment() {
                     return headers
                 }
             }
-
             queue.add(jsonObjectRequest)
         } else {
             val dialog = AlertDialog.Builder(activity as Context)
@@ -134,18 +128,13 @@ class DashboardFragment : Fragment() {
                 val settingsIntent = Intent(Settings.ACTION_WIRELESS_SETTINGS)
                 startActivity(settingsIntent)
                 activity?.finish()
-
             }
             dialog.setNegativeButton("Close") { text, listener ->
                 ActivityCompat.finishAffinity(activity as Activity)
-
             }
-
             dialog.create()
             dialog.show()
         }
-
-
         return view
     }
 }
