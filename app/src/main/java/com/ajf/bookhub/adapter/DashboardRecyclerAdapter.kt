@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ajf.bookhub.R
 import com.ajf.bookhub.model.Book
 
-class DashboardRecyclerAdapter(val context: Context, val itemList: ArrayList<Book>) :
+class DashboardRecyclerAdapter(val context: Context, private val itemList: ArrayList<Book>) :
     RecyclerView.Adapter<DashboardRecyclerAdapter.DashboardViewHolder>() {
     class DashboardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val txtBookTitle: TextView = view.findViewById(R.id.tvBookTitleID)

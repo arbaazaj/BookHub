@@ -18,4 +18,8 @@
     <string name="txt_profile_email">Email: example@gmail.com</string>
     <string name="txt_profile_number">Mobile No: +971500000000</string>
     <string name="txt_profile_address">Address:- 23St, Al Rigga, Deira, Dubai, Dubai, U.A.E</string>
+    <string name="txt_title_of_the_book">Title of the Book</string>
+    <string name="txt_rating">⭐ 4.5</string>
+    <string name="txt_author">Author</string>
+    <string name="txt_price">Rs. 299</string>
 </resources>

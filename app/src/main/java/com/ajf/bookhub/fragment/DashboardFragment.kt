@@ -17,22 +17,9 @@ class DashboardFragment : Fragment() {
     private lateinit var rvDashboard: RecyclerView
     private lateinit var layoutManager: RecyclerView.LayoutManager
 
-    private val bookList = arrayListOf(
-        "Hello Kitty",
-        "My Dreams",
-        "Lock n Love",
-        "The Spirits Call me",
-        "Legends Of Tomorrow",
-        "Night Sky",
-        "Rainbow Rides",
-        "Lucrative Decision",
-        "Harry Potter",
-        "Twilight"
-    )
-
     private lateinit var recyclerAdapter: DashboardRecyclerAdapter
 
-    val bookInfoList = arrayListOf<Book>(
+    private val bookInfoList = arrayListOf(
         Book("Hello Kitty", "Julian", "Rs. 699", "4.8", R.drawable.anna_kare),
         Book("My Dreams", "X", "Rs. 1099", "4.0", R.drawable.adventures_finn),
         Book("Lock n Love", "Robert R.J", "Rs. 300", "3.2", R.drawable.great_gatsby),
