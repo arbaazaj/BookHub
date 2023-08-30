@@ -22,4 +22,5 @@
     <string name="txt_rating">⭐ 4.5</string>
     <string name="txt_author">Author</string>
     <string name="txt_price">Rs. 299</string>
+    <string name="btn_txt_check_internet">Check Internet</string>
 </resources>

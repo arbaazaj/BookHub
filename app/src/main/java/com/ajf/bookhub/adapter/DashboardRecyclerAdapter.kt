@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ajf.bookhub.R
@@ -18,6 +19,7 @@ class DashboardRecyclerAdapter(val context: Context, private val itemList: Array
         val txtBookPrice: TextView = view.findViewById(R.id.tvPriceID)
         val txtBookRating: TextView = view.findViewById(R.id.tvRatingID)
         val imgBookCover: ImageView = view.findViewById(R.id.imgBookCover)
+        val rlContent: RelativeLayout = view.findViewById(R.id.rlContent)
 
     }
 
@@ -38,6 +40,10 @@ class DashboardRecyclerAdapter(val context: Context, private val itemList: Array
         holder.txtBookPrice.text = book.bookCost
         holder.txtBookRating.text = book.bookRating
         holder.imgBookCover.setImageResource(book.bookCover)
+
+        holder.rlContent.setOnClickListener {
+
+        }
 
     }
 }

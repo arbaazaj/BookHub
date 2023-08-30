@@ -7,9 +7,19 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvDashboard"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp" />
+
+    <Button
+        android:id="@+id/btnCheckInternet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/primaryColor"
+        android:text="@string/btn_txt_check_internet"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
 
 </RelativeLayout>
