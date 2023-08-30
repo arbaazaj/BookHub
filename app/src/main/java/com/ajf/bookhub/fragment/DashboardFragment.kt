@@ -14,6 +14,8 @@ import com.ajf.bookhub.R
 import com.ajf.bookhub.adapter.DashboardRecyclerAdapter
 import com.ajf.bookhub.model.bookInfoList
 import com.ajf.bookhub.util.ConnectionManager
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 
 class DashboardFragment : Fragment() {
 
@@ -67,6 +69,13 @@ class DashboardFragment : Fragment() {
 //                (layoutManager as LinearLayoutManager).orientation
 //            )
 //        )
+
+        val queue = Volley.newRequestQueue(activity as Context)
+        val url = "http://13.235.250.119/v1/book/fetch_books/"
+
+        val jsonObjectRequest = object : JsonObjectRequest() {
+
+        }
 
         return view
     }
