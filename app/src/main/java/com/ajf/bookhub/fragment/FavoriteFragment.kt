@@ -1,19 +1,67 @@
 package com.ajf.bookhub.fragment
 
+import android.content.Context
+import android.os.AsyncTask
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
+import android.widget.RelativeLayout
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
 import com.ajf.bookhub.R
+import com.ajf.bookhub.adapter.FavoriteRecyclerAdapter
+import com.ajf.bookhub.database.BookDatabase
+import com.ajf.bookhub.database.BookEntity
 
 class FavoriteFragment : Fragment() {
+
+    private lateinit var recyclerFavorite: RecyclerView
+    private lateinit var progressLayout: RelativeLayout
+    private lateinit var progressBar: ProgressBar
+    private lateinit var layoutManager: RecyclerView.LayoutManager
+    private lateinit var recyclerAdapter: FavoriteRecyclerAdapter
+
+    private var dbBookList = listOf<BookEntity>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favorite, container, false)
+
+        val view = inflater.inflate(R.layout.fragment_favorite, container, false)
+        recyclerFavorite = view.findViewById(R.id.recyclerFavorite)
+        progressLayout = view.findViewById(R.id.progressLayout)
+        progressBar = view.findViewById(R.id.progressBar)
+
+        layoutManager = GridLayoutManager(activity as Context, 2)
+
+        dbBookList = RetrieveFavorite(activity as Context).execute().get()
+        if (dbBookList.isEmpty()) {
+            println("List is empty")
+        }
+        println("Result: $dbBookList")
+
+        if (activity != null) {
+            progressLayout.visibility = View.GONE
+            recyclerAdapter = FavoriteRecyclerAdapter(activity as Context, dbBookList)
+            recyclerFavorite.adapter = recyclerAdapter
+            recyclerFavorite.layoutManager = layoutManager
+        }
+
+        return view
     }
+
+    class RetrieveFavorite(val context: Context) : AsyncTask<Void, Void, List<BookEntity>>() {
+
+        override fun doInBackground(vararg p0: Void?): List<BookEntity> {
+            val db = Room.databaseBuilder(context, BookDatabase::class.java, "book-db").build()
+            return db.bookDao().getAllBooks()
+        }
+
+    }
+
 }

@@ -27,4 +27,5 @@
     <string name="btn_txt_add_to_favorite">Add to Favorite</string>
     <string name="txt_book_desc">Description of the book will be displayed here</string>
     <string name="txt_remove_from_favorite">Remove from Favorite</string>
+    <string name="txt_demo_rating">⭐ 4.5</string>
 </resources>

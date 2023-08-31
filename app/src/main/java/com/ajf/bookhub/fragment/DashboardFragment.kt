@@ -78,13 +78,20 @@ class DashboardFragment : Fragment() {
                                     bookJsonObject.getString("book_id"),
                                     bookJsonObject.getString("name"),
                                     bookJsonObject.getString("author"),
-                                    bookJsonObject.getString("rating"),
                                     bookJsonObject.getString("price"),
+                                    bookJsonObject.getString("rating"),
                                     bookJsonObject.getString("image")
                                 )
                                 bookInfoList.add(bookObject)
-                                recyclerAdapter =
-                                    DashboardRecyclerAdapter(activity as Context, bookInfoList)
+                                if (bookInfoList.isNotEmpty()) {
+                                    if (activity != null) {
+                                        recyclerAdapter =
+                                            DashboardRecyclerAdapter(
+                                                activity as Context,
+                                                bookInfoList
+                                            )
+                                    }
+                                }
                                 rvDashboard.adapter = recyclerAdapter
                                 rvDashboard.layoutManager = layoutManager
                             }

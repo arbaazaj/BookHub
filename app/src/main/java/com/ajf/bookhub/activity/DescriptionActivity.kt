@@ -267,7 +267,8 @@ class DescriptionActivity : AppCompatActivity() {
         Mode 3- Remove the favorite book.
         */
 
-        val db = Room.databaseBuilder(context, BookDatabase::class.java, "book-db").build()
+        // Database creation [Name of the database is book-db]
+        private val db = Room.databaseBuilder(context, BookDatabase::class.java, "book-db").build()
 
         override fun doInBackground(vararg p0: Void?): Boolean {
             when (mode) {
