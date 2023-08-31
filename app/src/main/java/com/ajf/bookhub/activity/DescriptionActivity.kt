@@ -1,7 +1,9 @@
 package com.ajf.bookhub.activity
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
+import android.os.AsyncTask
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
@@ -14,7 +16,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.room.Room
 import com.ajf.bookhub.R
+import com.ajf.bookhub.database.BookDatabase
+import com.ajf.bookhub.database.BookEntity
 import com.ajf.bookhub.util.ConnectionManager
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
@@ -104,11 +110,101 @@ class DescriptionActivity : AppCompatActivity() {
 
                             Picasso.get().load(bookJsonObject.getString("image"))
                                 .error(R.drawable.default_book_cover).into(imgBookCover)
+
+                            val bookImageUri = bookJsonObject.getString("image")
+
                             txtBookName.text = bookJsonObject.getString("name")
                             txtBookAuthor.text = bookJsonObject.getString("author")
                             txtBookPrice.text = bookJsonObject.getString("price")
-                            txtBookRating.text = bookJsonObject.getString("rating")
+                            txtBookRating.text = "⭐ " + bookJsonObject.getString("rating")
                             txtBookDesc.text = bookJsonObject.getString("description")
+
+                            val bookEntity = BookEntity(
+                                bookId?.toInt() as Int,
+                                txtBookName.text.toString(),
+                                txtBookAuthor.text.toString(),
+                                txtBookPrice.text.toString(),
+                                txtBookRating.text.toString(),
+                                txtBookDesc.text.toString(),
+                                bookImageUri
+                            )
+
+                            val checkFav = DBAsyncTask(applicationContext, bookEntity, 1).execute()
+                            val isFav = checkFav.get()
+
+                            if (isFav) {
+                                btnAddToFav.text = getString(R.string.txt_remove_from_favorite)
+                                val favColor = ContextCompat.getColor(
+                                    applicationContext,
+                                    R.color.colorFavorite
+                                )
+                                btnAddToFav.setBackgroundColor(favColor)
+                            } else {
+                                btnAddToFav.text = getString(R.string.btn_txt_add_to_favorite)
+                                val favColor = ContextCompat.getColor(
+                                    applicationContext,
+                                    R.color.colorPrimary
+                                )
+                                btnAddToFav.setBackgroundColor(favColor)
+                            }
+
+                            // Button click events.
+                            btnAddToFav.setOnClickListener {
+                                if (!DBAsyncTask(applicationContext, bookEntity, 1).execute()
+                                        .get()
+                                ) {
+                                    val async =
+                                        DBAsyncTask(applicationContext, bookEntity, 2).execute()
+                                    val result = async.get()
+                                    if (result) {
+                                        Toast.makeText(
+                                            this@DescriptionActivity,
+                                            "Added to Favorite",
+                                            Toast.LENGTH_LONG
+                                        ).show()
+
+                                        btnAddToFav.text =
+                                            getString(R.string.txt_remove_from_favorite)
+                                        val favColor = ContextCompat.getColor(
+                                            applicationContext,
+                                            R.color.colorFavorite
+                                        )
+                                        btnAddToFav.setBackgroundColor(favColor)
+                                    } else {
+                                        Toast.makeText(
+                                            this@DescriptionActivity,
+                                            "Some error occurred",
+                                            Toast.LENGTH_LONG
+                                        ).show()
+                                    }
+                                } else {
+                                    val async =
+                                        DBAsyncTask(applicationContext, bookEntity, 3).execute()
+                                    val result = async.get()
+
+                                    if (result) {
+                                        Toast.makeText(
+                                            this@DescriptionActivity,
+                                            "Removed from Favorite",
+                                            Toast.LENGTH_LONG
+                                        ).show()
+
+                                        btnAddToFav.text =
+                                            getString(R.string.btn_txt_add_to_favorite)
+                                        val favColor = ContextCompat.getColor(
+                                            applicationContext,
+                                            R.color.colorPrimary
+                                        )
+                                        btnAddToFav.setBackgroundColor(favColor)
+                                    } else {
+                                        Toast.makeText(
+                                            this@DescriptionActivity,
+                                            "Some error occurred",
+                                            Toast.LENGTH_LONG
+                                        ).show()
+                                    }
+                                }
+                            }
 
                         } else {
                             Toast.makeText(
@@ -161,11 +257,39 @@ class DescriptionActivity : AppCompatActivity() {
             dialog.show()
         }
 
-        // Button click events.
-        btnAddToFav.setOnClickListener {
-            // TODO:
+    }
+
+    class DBAsyncTask(val context: Context, val bookEntity: BookEntity, private val mode: Int) :
+        AsyncTask<Void, Void, Boolean>() {
+        /*
+        Mode 1- Check DB if the book is fav or not.
+        Mode 2- Save the book into DB as favorite.
+        Mode 3- Remove the favorite book.
+        */
+
+        val db = Room.databaseBuilder(context, BookDatabase::class.java, "book-db").build()
+
+        override fun doInBackground(vararg p0: Void?): Boolean {
+            when (mode) {
+                1 -> {
+                    val book: BookEntity = db.bookDao().getBookById(bookEntity.bookId.toString())
+                    db.close()
+                    return book != null
+                }
+
+                2 -> {
+                    db.bookDao().insertBook(bookEntity)
+                    db.close()
+                    return true
+                }
+
+                3 -> {
+                    db.bookDao().deleteBook(bookEntity)
+                    db.close()
+                    return true
+                }
+            }
+            return false
         }
-
-
     }
 }

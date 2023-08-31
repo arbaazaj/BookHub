@@ -93,7 +93,8 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_below="@id/llContent">
 
                 <TextView
                     android:id="@+id/txtAboutTheBook"
@@ -114,10 +115,9 @@
                     android:layout_centerHorizontal="true"
                     android:layout_margin="10dp"
                     android:padding="6dp"
-                    android:text="@string/txt_about_the_book"
+                    android:text="@string/txt_book_desc"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textSize="18sp" />
             </RelativeLayout>
         </RelativeLayout>
     </ScrollView>
@@ -133,18 +133,18 @@
         android:textSize="19sp"
         android:textStyle="bold" />
 
-    <RelativeLayout
-        android:id="@+id/progressLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white">
+        <RelativeLayout
+            android:id="@+id/progressLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true" />
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true" />
 
-    </RelativeLayout>
+        </RelativeLayout>
 
 </RelativeLayout>
